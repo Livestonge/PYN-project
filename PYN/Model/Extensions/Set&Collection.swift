@@ -36,6 +36,8 @@ extension Set where Element == Query {
         
         if removeArticle{
             query.articles.remove(at: articleIndex)
+        }else{
+            query.articles[articleIndex] = article
         }
 
         let newQuery = Query(title: query.title, articles: query.articles)
