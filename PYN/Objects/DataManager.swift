@@ -95,10 +95,6 @@ final class DataManager: ObservableObject{
                                 newArticle.downloadImage()
                                 return newArticle
                                })
-                              .breakpoint(receiveSubscription: nil, receiveOutput: ({article in
-                                  print("image downloaded:",article.imageData != nil)
-                                  return false
-                              }), receiveCompletion: nil)
                                .receive(on: DispatchQueue.main)
                                .sink(receiveValue: {[weak self] completeArticle in
                                 guard let self = self else {return}
