@@ -25,7 +25,8 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     var formattedDate: String{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard let dateText = rawArticle.publishedAt, let articleDate = formatter.date(from: dateText) else {return "Invalide date"}
+        guard let dateText = rawArticle.publishedAt, let articleDate = formatter.date(from: dateText)
+        else {return "Invalide date"}
         
         let relativeFormatter = RelativeDateTimeFormatter()
         relativeFormatter.unitsStyle = .full
@@ -37,7 +38,8 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     mutating func downloadImage(){
         guard let path = rawArticle.urlToImage, let url = URL(string: path),
               let content = try? Data(contentsOf: url),
-              let data = UIImage(data: content) else {return}
+              let data = UIImage(data: content)
+        else {return}
         
         self.imageData = data.pngData()!
     }
