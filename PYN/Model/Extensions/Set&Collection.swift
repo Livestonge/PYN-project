@@ -31,7 +31,7 @@ extension Set where Element == Query {
                                  removeArticle: Bool = false) -> CompleteArticle?{
         
         guard let title = title,var query = self.removeQueryWith(title: title) else {return nil}
-        guard let articleIndex = query.articles.getIndex(for: article)
+        guard let articleIndex = query.articles.getIndex(of: article)
         else {self.reInsert(query); return nil}
         
         if removeArticle{
@@ -49,7 +49,7 @@ extension Set where Element == Query {
 
 extension Collection where Element == CompleteArticle {
     
-    func getIndex(for completeArticle: CompleteArticle) -> Self.Index?{
+    func getIndex(of completeArticle: CompleteArticle) -> Self.Index?{
         return self.firstIndex(where: { $0.id == completeArticle.id})
     }
 }
