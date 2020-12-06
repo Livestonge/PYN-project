@@ -13,7 +13,7 @@ struct ArticleRow_3: View {
     var body: some View {
         
         return HStack(alignment: .center){
-            Image(uiImage: (article.imageData != nil ? UIImage(data: article.imageData!)! : UIImage(systemName: "globe")!))
+            Image(uiImage: UIImage(data: article.imageData)!)
                 .resizable()
                 .frame(width: 50, height: 50)
                 .cornerRadius(10)

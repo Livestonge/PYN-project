@@ -20,7 +20,7 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     var id = UUID()
     let rawArticle: RawArticle
     let query: String
-    var imageData: Data?
+    var imageData: Data = UIImage(systemName: "globe")!.pngData()!
     
     var formattedDate: String{
         let formatter = DateFormatter()
@@ -39,7 +39,7 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
               let content = try? Data(contentsOf: url),
               let data = UIImage(data: content) else {return}
         
-        self.imageData = data.pngData()
+        self.imageData = data.pngData()!
     }
         
     
@@ -54,8 +54,4 @@ struct Query: Hashable{
     let id = UUID()
     let title: String
     var articles = [CompleteArticle]()
-}
-
-enum ArticleUpdate{
-    case articleRemoval, imageUpdate(UIImage?)
 }
