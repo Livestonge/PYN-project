@@ -29,17 +29,7 @@ struct RawArticle: Codable, Hashable{
     let urlToImage: String?
     
     
-    var formattedDate: String{
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard let dateText = publishedAt, let articleDate = formatter.date(from: dateText) else {return "Invalide date"}
-        
-        let relativeFormatter = RelativeDateTimeFormatter()
-        relativeFormatter.unitsStyle = .full
-        relativeFormatter.dateTimeStyle = .named
-        let formattedDate = relativeFormatter.localizedString(for: articleDate, relativeTo: Date())
-        return formattedDate
-    }
+    
 }
 
 struct SearchResult: Codable{

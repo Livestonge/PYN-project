@@ -28,7 +28,7 @@ struct ArticleRow_3: View {
                         .fontWeight(.thin)
                         .padding(.top)
                     Spacer()
-                    Text(article.rawArticle.formattedDate)
+                    Text(article.formattedDate)
                         .font(.subheadline)
                         .fontWeight(.thin)
                         .padding(.top)
