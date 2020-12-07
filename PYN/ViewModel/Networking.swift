@@ -63,7 +63,9 @@ class Networking {
         
         return rawArticles.publisher
                               .map({ (rawArticle: RawArticle) -> CompleteArticle in
-                                return CompleteArticle(rawArticle: rawArticle, query: queryTitle)
+                                return CompleteArticle(rawArticle: rawArticle,
+                                                       metadata: Metadata(title: queryTitle,
+                                                                          fetchDate: Date()))
                                })
                                .collect()
                                .eraseToAnyPublisher()

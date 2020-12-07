@@ -19,7 +19,7 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     
     var id = UUID()
     let rawArticle: RawArticle
-    let query: String
+    let metadata: Metadata
     var imageData: Data = UIImage(systemName: "globe")!.pngData()!
     
     var formattedDate: String{
@@ -45,6 +45,12 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     }
         
     
+}
+
+struct Metadata: Hashable, Codable{
+    
+    let title: String
+    let fetchDate: Date
 }
 
 struct Query: Hashable{

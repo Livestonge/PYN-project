@@ -39,17 +39,22 @@ final class DataManager: ObservableObject{
     func loadDataFromDisk(){
         
         self.cache.loadFromDisk()
-        let entries = self.cache.retrieveAll()
+        filterAndOrganizeData()
+    }
+    
+    private func filterAndOrganizeData(){
         
+        let entries = self.cache.retrieveAll()
         var resultSet = Set<[CompleteArticle]>()
+        
         entries.forEach{ entry in
-             let filtered = entries.filter{ $0.value.query == entry.value.query}
+            let filtered = entries.filter{ $0.value.metadata.title == entry.value.metadata.title}
             resultSet.insert(filtered.map(\.value))
         }
         
         for articles in Array(resultSet){
             guard let article = articles.first else {return}
-            let query = Query(title: article.query, articles: articles)
+            let query = Query(title: article.metadata.title, articles: articles)
             self.searchResult.insert(query)
         }
     }
@@ -88,7 +93,7 @@ final class DataManager: ObservableObject{
 
         self.searchResult.publisher
                               .flatMap(\.articles.publisher)
-                              .filter({ $0.query == query})
+                              .filter({ $0.metadata.title == query})
                               .subscribe(on: DispatchQueue.global())
                               .map({(article: CompleteArticle) -> CompleteArticle in
                                 var newArticle = article
