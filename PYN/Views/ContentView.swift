@@ -13,7 +13,6 @@ struct ContentView: View {
     @State var query: String = ""
     
     var body: some View {
-        return NavigationView{
             GeometryReader{geometry in
                 ZStack(alignment: .bottom){
                     List{
@@ -31,15 +30,6 @@ struct ContentView: View {
                                    alignment: .center)
                     }
                 }
-            }
-            .navigationTitle(self.searchResultProvider.results.isEmpty
-                                ? "Make a search" : "Search result").font(.subheadline)
-            .overlay(
-                ViewControllerResolver{ viewController in
-                viewController.navigationItem.searchController = self.searchResultProvider.searchController
-                }
-                .frame(width: 0, height: 0)
-            )
             }
         
     }

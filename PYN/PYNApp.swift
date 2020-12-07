@@ -15,8 +15,19 @@ struct PYNApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(searchResultProvider)
+            NavigationView{
+                ContentView()
+                    .environmentObject(searchResultProvider)
+                    .navigationTitle(self.searchResultProvider.results.isEmpty
+                                        ? "Make a search" : "Search result").font(.subheadline)
+                    .overlay(
+                        ViewControllerResolver{ viewController in
+                        viewController.navigationItem.searchController = self.searchResultProvider.searchController
+                        }
+                        .frame(width: 0, height: 0)
+                    )
+             }
+            
         }
         .onChange(of: scenephase){ newphase in
             switch newphase {
