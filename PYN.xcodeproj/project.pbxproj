@@ -123,7 +123,7 @@
 				84E532E6255AD02D00D90843 /* UIControllerRepresentable.swift */,
 				84DEA5BE2559DB96001E7BCF /* Model */,
 				84D578422569D04400FBC7FE /* Views */,
-				84D5782B2569CBAE00FBC7FE /* Objects */,
+				84D5782B2569CBAE00FBC7FE /* ViewModel */,
 				84493B3125557432008DBFDA /* Assets.xcassets */,
 				84493B3625557432008DBFDA /* Info.plist */,
 				84493B3325557432008DBFDA /* Preview Content */,
@@ -139,15 +139,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		84D5782B2569CBAE00FBC7FE /* Objects */ = {
+		84D5782B2569CBAE00FBC7FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				841DCA872555866300619B5B /* SearchResultProvider.swift */,
+				84493B5B255574B0008DBFDA /* CompleteArticle.swift */,
 				846E48092569AD070095906A /* DataManager.swift */,
 				84493B602555750B008DBFDA /* Networking.swift */,
 				84E532EB255B2E1500D90843 /* Cache.swift */,
 			);
-			path = Objects;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		84D5782F2569CF3500FBC7FE /* Extensions */ = {
@@ -175,7 +176,6 @@
 		84DEA5BE2559DB96001E7BCF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84493B5B255574B0008DBFDA /* CompleteArticle.swift */,
 				84DEA5B62559DAF9001E7BCF /* RawModel.swift */,
 				84493B6A25557596008DBFDA /* Languages.swift */,
 				844D8BE02556D2410030D05A /* Errors_T.swift */,
