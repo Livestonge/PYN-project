@@ -10,7 +10,7 @@ import Foundation
 struct RawArticle: Codable, Hashable{
     
     static func == (lhs: RawArticle, rhs: RawArticle) -> Bool {
-        return lhs.description == rhs.description
+        return lhs.title == rhs.title
     }
     
     
@@ -19,12 +19,9 @@ struct RawArticle: Codable, Hashable{
           let name: String?
     }
     
-    let author: String?
     let source: RawSource
     let title: String?
     let url: String?
-    let description: String?
-    let content: String?
     let publishedAt: String?
     let urlToImage: String?
     
