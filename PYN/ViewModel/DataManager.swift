@@ -42,6 +42,8 @@ final class DataManager: ObservableObject{
         self.cache.loadFromDisk()
         getRidOfOldData()
         filterAndOrganizeData()
+        // Updating every hour and
+        // only when the app is moving to the foreground.
         fetchNewData()
     }
     
@@ -50,9 +52,9 @@ final class DataManager: ObservableObject{
         let entries = self.cache.retrieveAll()
         for entry in entries{
             let article = entry.value
-            guard article.metadata.fetchDate.addingTimeInterval(10) < Date()
+            guard article.metadata.fetchDate.isOldData
             else {continue}
-            
+            // fetching the metadata from the article before removing from the cache.
             self.metadataSet.insert(article.metadata)
             self.cache.remove(key: entry.key)
         }
@@ -65,6 +67,8 @@ final class DataManager: ObservableObject{
                 let index = Languages.firstIndexOf(metadata.language)
                 self.fetchData(for: metadata.title, selectedLanguageIndex: index)
             }
+            // Empty the list after new data has been fetched.
+            self.metadataSet.removeAll()
         }
     }
     
@@ -91,12 +95,11 @@ final class DataManager: ObservableObject{
         self.metadataSet.removeAll()
     }
     
-    func fetchData(for query: String, selectedLanguageIndex: Int){
+    func fetchData(for queryTitle: String, selectedLanguageIndex: Int){
         
-        let query = query
         let language = Languages.allCases[selectedLanguageIndex]
         
-        self.networking.fetchData(query: query, language: language)
+        self.networking.fetchData(query: queryTitle, language: language)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {completion in
                 switch completion{
@@ -107,20 +110,20 @@ final class DataManager: ObservableObject{
                 }
             }, receiveValue: { [weak self] completeArticles in
                 guard let self = self else {return}
-                let articles = Array(completeArticles[0..<4])
-                var queryObj = Query(title: query)
+                let articles = Array(completeArticles.prefix(4))
+                var queryObj = Query(title: queryTitle)
                 queryObj.articles = articles
                 self.searchResult.insert(queryObj)
-                self.dowloadImages(forArticlesIn: query)
+                self.dowloadImages(forArticlesWith: queryTitle)
             })
             .store(in: &subscriptions)
     }
     
-    private func dowloadImages(forArticlesIn query: String){
+    private func dowloadImages(forArticlesWith queryTitle: String){
 
         self.searchResult.publisher
                               .flatMap(\.articles.publisher)
-                              .filter({ $0.metadata.title == query})
+                              .filter({ $0.metadata.title == queryTitle})
                               .subscribe(on: DispatchQueue.global())
                               .map({(article: CompleteArticle) -> CompleteArticle in
                                 var newArticle = article
@@ -130,7 +133,7 @@ final class DataManager: ObservableObject{
                                .receive(on: DispatchQueue.main)
                                .sink(receiveValue: {[weak self] completeArticle in
                                 guard let self = self else {return}
-                                self.updateSearchResultAndCache(for: query,
+                                self.updateSearchResultAndCache(for: queryTitle,
                                                                 with: completeArticle)
                                })
                                .store(in: &subscriptions)
@@ -138,10 +141,10 @@ final class DataManager: ObservableObject{
     
     
     
-    private func updateSearchResultAndCache(for title: String,
+    private func updateSearchResultAndCache(for queryTitle: String,
                                             with completeArticle: CompleteArticle){
         
-        guard let article = self.searchResult.updatesResults(for: title, and: completeArticle)
+        guard let article = self.searchResult.updatesResults(for: queryTitle, and: completeArticle)
         else {return}
         self.cache.insert(value: article, for: article.id)
     }

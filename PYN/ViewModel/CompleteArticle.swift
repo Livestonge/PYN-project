@@ -10,12 +10,7 @@ import UIKit
 
 
 
-struct CompleteArticle: Codable, Identifiable, Hashable{
-    
-    static func == (lhs: CompleteArticle, rhs: CompleteArticle) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
+struct CompleteArticle: Codable, Identifiable{
     
     var id = UUID()
     let rawArticle: RawArticle
@@ -47,20 +42,9 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     
 }
 
-struct Metadata: Codable{
+extension CompleteArticle: Hashable{
     
-    let title: String
-    let fetchDate: Date
-    let language: Languages
-}
-
-struct Query: Hashable{
-    
-    static func == (lhs: Query, rhs: Query) -> Bool{
+    static func == (lhs: CompleteArticle, rhs: CompleteArticle) -> Bool {
         return lhs.id == rhs.id
     }
-    
-    let id = UUID()
-    let title: String
-    var articles = [CompleteArticle]()
 }
