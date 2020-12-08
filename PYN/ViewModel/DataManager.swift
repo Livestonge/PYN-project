@@ -12,6 +12,7 @@ import Combine
 final class DataManager: ObservableObject{
     
     @Published var searchResult = Set<Query>()
+    var metadataSet = Set<Metadata>()
     var subscriptions = Set<AnyCancellable>()
     
     lazy private var networking = Networking()
@@ -39,7 +40,32 @@ final class DataManager: ObservableObject{
     func loadDataFromDisk(){
         
         self.cache.loadFromDisk()
+        getRidOfOldData()
         filterAndOrganizeData()
+        fetchNewData()
+    }
+    
+    func getRidOfOldData(){
+        
+        let entries = self.cache.retrieveAll()
+        for entry in entries{
+            let article = entry.value
+            guard article.metadata.fetchDate.addingTimeInterval(10) < Date()
+            else {continue}
+            
+            self.metadataSet.insert(article.metadata)
+            self.cache.remove(key: entry.key)
+        }
+    }
+    
+    private func fetchNewData(){
+        
+        if !self.metadataSet.isEmpty{
+            for metadata in metadataSet{
+                let index = Languages.firstIndexOf(metadata.language)
+                self.fetchData(for: metadata.title, selectedLanguageIndex: index)
+            }
+        }
     }
     
     private func filterAndOrganizeData(){
@@ -62,6 +88,7 @@ final class DataManager: ObservableObject{
     func saveDataToDisk(){
         self.cache.saveToDisc()
         self.searchResult.removeAll()
+        self.metadataSet.removeAll()
     }
     
     func fetchData(for query: String, selectedLanguageIndex: Int){

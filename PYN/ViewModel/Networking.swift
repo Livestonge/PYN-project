@@ -32,8 +32,8 @@ class Networking {
                             .decode(type:SearchResult.self, decoder: JSONDecoder())
                             .mapError({NetworkError(error: $0, query: query)})
                             .map(\.articles)
-                            .map{ (article: [RawArticle]) -> ([RawArticle], String) in
-                                return (article, query)
+                            .map{ (article: [RawArticle]) -> ([RawArticle], String, Languages) in
+                                return (article, query, language)
                             }
                             .flatMap(instantiateCompleteArticles)
                             .eraseToAnyPublisher()
@@ -59,13 +59,15 @@ class Networking {
     
     //@available(iOS 14.0, *)
     func instantiateCompleteArticles(for rawArticles: [RawArticle],
-                                     and queryTitle: String) -> AnyPublisher<[CompleteArticle], Never>{
+                                     and queryTitle: String,
+                                     language: Languages) -> AnyPublisher<[CompleteArticle], Never>{
         
         return rawArticles.publisher
                               .map({ (rawArticle: RawArticle) -> CompleteArticle in
                                 return CompleteArticle(rawArticle: rawArticle,
                                                        metadata: Metadata(title: queryTitle,
-                                                                          fetchDate: Date()))
+                                                                          fetchDate: Date(),
+                                                                          language: language))
                                })
                                .collect()
                                .eraseToAnyPublisher()

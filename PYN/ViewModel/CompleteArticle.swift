@@ -47,10 +47,11 @@ struct CompleteArticle: Codable, Identifiable, Hashable{
     
 }
 
-struct Metadata: Hashable, Codable{
+struct Metadata: Codable{
     
     let title: String
     let fetchDate: Date
+    let language: Languages
 }
 
 struct Query: Hashable{
