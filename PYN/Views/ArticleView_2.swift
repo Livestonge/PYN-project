@@ -12,7 +12,9 @@ struct ArticleView_2: View {
     
     var body: some View {
             ForEach(articles){ article in
-                ArticleRow_3(article: article)
+                NavigationLink(destination: ArticleDetail(article: article.rawArticle)){
+                    ArticleRow_3(article: article)
+                }
             }
             .frame(height: 100.0)
     }
