@@ -33,6 +33,7 @@
 		84E532EC255B2E1500D90843 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E532EB255B2E1500D90843 /* Cache.swift */; };
 		84E9DF02258BF8CC0047DC0C /* ArticleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9DF01258BF8CC0047DC0C /* ArticleDetail.swift */; };
 		84E9DF07258BF8F30047DC0C /* ArticlePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9DF06258BF8F30047DC0C /* ArticlePage.swift */; };
+		84E9DF0C258C0BC00047DC0C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9DF0B258C0BC00047DC0C /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		84E532EB255B2E1500D90843 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		84E9DF01258BF8CC0047DC0C /* ArticleDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDetail.swift; sourceTree = "<group>"; };
 		84E9DF06258BF8F30047DC0C /* ArticlePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlePage.swift; sourceTree = "<group>"; };
+		84E9DF0B258C0BC00047DC0C /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				84E532E1255ACC5800D90843 /* HeaderView.swift */,
 				841DCAB02555FB8A00619B5B /* ArticleView_2.swift */,
 				84E9DF01258BF8CC0047DC0C /* ArticleDetail.swift */,
+				84E9DF0B258C0BC00047DC0C /* LoadingView.swift */,
 				84E9DF06258BF8F30047DC0C /* ArticlePage.swift */,
 				841DCAB82555FC2400619B5B /* ArticleRow_3.swift */,
 				846E4804256957640095906A /* LanguageView.swift */,
@@ -349,6 +352,7 @@
 				843610C7257EE90B00000E34 /* Metadata.swift in Sources */,
 				84E532E2255ACC5800D90843 /* HeaderView.swift in Sources */,
 				841DCAB12555FB8A00619B5B /* ArticleView_2.swift in Sources */,
+				84E9DF0C258C0BC00047DC0C /* LoadingView.swift in Sources */,
 				843610D9257FBAD400000E34 /* Query.swift in Sources */,
 				841DCA882555866300619B5B /* SearchResultProvider.swift in Sources */,
 				84493B6B25557597008DBFDA /* Languages.swift in Sources */,
