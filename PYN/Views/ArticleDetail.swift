@@ -7,18 +7,28 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ArticleDetail: View {
     
-    var article: RawArticle
+    let articleUrlPath: String
     @State var didFinishedLoading = false
     
     var body: some View {
-        ZStack {
-            ArticlePage(article: article,
+        return ZStack{
+            ArticlePage(articleUrlPath: articleUrlPath,
                         didFinishLoading: self.$didFinishedLoading)
-        }
-        .navigationBarTitle(article.source.name ?? "").font(.title)
+            
+        if !didFinishedLoading{
+            LoadingView()
+           }
+          }
+        .navigationBarTitle( "\(URL(string: articleUrlPath)!.host!)").font(.title)
+ }
+}
+
+
+struct ArticleDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        ArticleDetail(articleUrlPath: "https://www.vg.no")
     }
 }
