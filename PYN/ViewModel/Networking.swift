@@ -63,6 +63,8 @@ class Networking {
                                      language: Languages) -> AnyPublisher<[CompleteArticle], Never>{
         
         return rawArticles.publisher
+            //Storing only article with non nil url address.
+                              .filter({$0.url != nil})
                               .map({ (rawArticle: RawArticle) -> CompleteArticle in
                                 return CompleteArticle(rawArticle: rawArticle,
                                                        metadata: Metadata(title: queryTitle,
