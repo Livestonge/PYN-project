@@ -12,13 +12,13 @@ import WebKit
 
 struct ArticlePage: UIViewRepresentable {
    
-    var article: RawArticle
+    let articleUrlPath: String
     @Binding var didFinishLoading: Bool
     
     func makeUIView(context: Context) -> WKWebView{
         
         
-        guard let url = URL(string: article.url!) else {fatalError("Invalid URL")}
+        guard let url = URL(string: articleUrlPath) else {fatalError("Invalid URL")}
         let request = URLRequest(url: url)
         let webView = WKWebView()
         webView.load(request)
@@ -47,7 +47,15 @@ struct ArticlePage: UIViewRepresentable {
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
-            parent.didFinishLoading = true
+            
+            DispatchQueue.main.async {
+                withAnimation(Animation.easeIn(duration: 2)){ [weak self] in
+                    guard let self = self else {return}
+                    self.parent.didFinishLoading = true
+                }
+            }
+            
+            
         }
     }
 }
