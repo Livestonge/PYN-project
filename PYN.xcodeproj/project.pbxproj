@@ -26,7 +26,10 @@
 		844D8BE12556D2410030D05A /* Errors_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D8BE02556D2410030D05A /* Errors_T.swift */; };
 		846E4805256957640095906A /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E4804256957640095906A /* LanguageView.swift */; };
 		846E480A2569AD070095906A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E48092569AD070095906A /* DataManager.swift */; };
+		84B5942F2593E8920016A537 /* DidSelectLanguageBt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5942E2593E8920016A537 /* DidSelectLanguageBt.swift */; };
 		84C89732258BB14A008CC739 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C89731258BB14A008CC739 /* URL.swift */; };
+		84CD25992593ECE200EE052F /* LanguagePickerV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD25982593ECE100EE052F /* LanguagePickerV.swift */; };
+		84CD259E2593EEE100EE052F /* LanguageViewMdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD259D2593EEE100EE052F /* LanguageViewMdf.swift */; };
 		84D5783B2569CFEF00FBC7FE /* Set&Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5783A2569CFEF00FBC7FE /* Set&Collection.swift */; };
 		84DEA5B72559DAFA001E7BCF /* RawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEA5B62559DAF9001E7BCF /* RawModel.swift */; };
 		84E532E2255ACC5800D90843 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E532E1255ACC5800D90843 /* HeaderView.swift */; };
@@ -78,7 +81,10 @@
 		844D8BE02556D2410030D05A /* Errors_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors_T.swift; sourceTree = "<group>"; };
 		846E4804256957640095906A /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		846E48092569AD070095906A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		84B5942E2593E8920016A537 /* DidSelectLanguageBt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidSelectLanguageBt.swift; sourceTree = "<group>"; };
 		84C89731258BB14A008CC739 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		84CD25982593ECE100EE052F /* LanguagePickerV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerV.swift; sourceTree = "<group>"; };
+		84CD259D2593EEE100EE052F /* LanguageViewMdf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewMdf.swift; sourceTree = "<group>"; };
 		84D5783A2569CFEF00FBC7FE /* Set&Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set&Collection.swift"; sourceTree = "<group>"; };
 		84DEA5B62559DAF9001E7BCF /* RawModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawModel.swift; sourceTree = "<group>"; };
 		84E532E1255ACC5800D90843 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -164,6 +170,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		84B5942D2593E8200016A537 /* LanguageViewSelection */ = {
+			isa = PBXGroup;
+			children = (
+				846E4804256957640095906A /* LanguageView.swift */,
+				84CD259D2593EEE100EE052F /* LanguageViewMdf.swift */,
+				84B5942E2593E8920016A537 /* DidSelectLanguageBt.swift */,
+				84CD25982593ECE100EE052F /* LanguagePickerV.swift */,
+			);
+			path = LanguageViewSelection;
+			sourceTree = "<group>";
+		};
 		84D5782B2569CBAE00FBC7FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +215,7 @@
 				8435236925929A6B00498191 /* Loading */,
 				84E9DF06258BF8F30047DC0C /* ArticlePage.swift */,
 				841DCAB82555FC2400619B5B /* ArticleRow_3.swift */,
-				846E4804256957640095906A /* LanguageView.swift */,
+				84B5942D2593E8200016A537 /* LanguageViewSelection */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -361,9 +378,12 @@
 				84051CBC257D09CE00F216D0 /* LanguageObjExt.swift in Sources */,
 				843610CC257FB27300000E34 /* Date.swift in Sources */,
 				84493B2E2555742D008DBFDA /* PYNApp.swift in Sources */,
+				84CD25992593ECE200EE052F /* LanguagePickerV.swift in Sources */,
 				843610C7257EE90B00000E34 /* Metadata.swift in Sources */,
 				84E532E2255ACC5800D90843 /* HeaderView.swift in Sources */,
 				841DCAB12555FB8A00619B5B /* ArticleView_2.swift in Sources */,
+				84CD259E2593EEE100EE052F /* LanguageViewMdf.swift in Sources */,
+				84B5942F2593E8920016A537 /* DidSelectLanguageBt.swift in Sources */,
 				84E9DF0C258C0BC00047DC0C /* LoadingTitleView.swift in Sources */,
 				843610D9257FBAD400000E34 /* Query.swift in Sources */,
 				841DCA882555866300619B5B /* SearchResultProvider.swift in Sources */,
