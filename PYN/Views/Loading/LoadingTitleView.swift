@@ -36,5 +36,6 @@ struct LoadingTitleView: View {
 struct LoadingTitleView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingTitleView(isScaling: false)
+            .previewLayout(.sizeThatFits)
     }
 }
