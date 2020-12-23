@@ -10,6 +10,7 @@ import SwiftUI
 struct LanguagesView: View {
         
         @Binding var index: Int
+        @State private var isScaling = false
         var action: () -> Void
         
         var body: some View {
@@ -20,6 +21,7 @@ struct LanguagesView: View {
             Picker(selection: self.$index, label: Text("")){
                  ForEach(0 ..< Languages.allCases.count){
                     Text(Languages[$0])
+                        .foregroundColor(($0 == index ? .yellow : .black))
                   }
                }
               Button(action: {
@@ -50,13 +52,19 @@ struct LanguagesView: View {
                   radius: 10,
                   x: .zero,
                   y: .zero)
+           .scaleEffect(isScaling ? 1 : 0)
+           .onAppear(perform: {
+            withAnimation(Animation.easeOut(duration: 2)){
+                isScaling.toggle()
+            }
+           })
         }
-        
-
 }
 
-//struct LanguageView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LanguagesView(index: 0, action: <#T##() -> Void#>)
-//    }
-//}
+struct LanguageView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        LanguagesView(index: .constant(3),
+                      action: {})
+    }
+}

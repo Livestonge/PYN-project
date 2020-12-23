@@ -49,7 +49,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
     func performNetworkRequest(){
         let query = self.currentSearchTitle
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
-        showLanguagedView = false
+        updateLanguageViewTo(false)
     }
     
     func loadFromDisc(){
@@ -59,6 +59,16 @@ final class SearchResultProvider: NSObject, ObservableObject{
     func saveToDisc(){
         self.dataManager.saveDataToDisk()
     }
+    
+    private func updateLanguageViewTo(_ state: Bool){
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            withAnimation(Animation.easeInOut(duration: 2)){
+                self.showLanguagedView = state
+            }
+
+        }
+    }
 }
 
 extension SearchResultProvider: UISearchBarDelegate{
@@ -66,14 +76,15 @@ extension SearchResultProvider: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         if let title = searchController.searchBar.text, !title.isEmpty{
             self.currentSearchTitle = title
-            showLanguagedView = true
+           updateLanguageViewTo(true)
+            
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
        
 //        self.showSearchedItems = false
-//        self.showLanguages = false
+          updateLanguageViewTo(false)
 
     }
   

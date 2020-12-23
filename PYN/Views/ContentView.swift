@@ -28,6 +28,8 @@ struct ContentView: View {
                                       action: self.searchResultProvider.performNetworkRequest)
                             .frame(width: geometry.size.width * 0.8,
                                    alignment: .center)
+                            .zIndex(10)
+                            .transition(.move(edge: .bottom))
                     }
                 }
             }
@@ -35,8 +37,9 @@ struct ContentView: View {
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(SearchResultProvider())
+    }
+}
