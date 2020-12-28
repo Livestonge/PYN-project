@@ -11,6 +11,7 @@ public struct DidSelectLanguageBt: View {
     
     var index: Int
     var action: ()->Void
+    @Environment(\.colorScheme) var colorScheme
     
     public var body: some View {
         Button(action: {
@@ -18,19 +19,24 @@ public struct DidSelectLanguageBt: View {
           
       }){
           Text("Placeholder!!!!!")
-              .font(.headline)
-              .hidden()
-              .background(Color(UIColor.systemTeal))
-              .clipShape(Capsule())
-              .padding()
-              .overlay(
+            .font(Font.headline.bold())
+            .hidden()
+            .padding()
+            .overlay(
                   HStack{
                       Text("\(Languages[self.index])")
                      .font(.headline)
                      Image(systemName: "hand.thumbsup")
                      }
-                  .foregroundColor(Color(UIColor.label))
+                  .foregroundColor(colorScheme == .dark ? .black : .primary)
                 )
+            .background(colorScheme == .dark ? .orange : Color(UIColor.systemBlue))
+            .clipShape(Capsule())
+            .padding(.bottom, 10)
+               
+                
+                
+                
          
       }
     }
@@ -40,5 +46,6 @@ struct DidSelectLanguageBt_Previews: PreviewProvider {
     static var previews: some View {
         DidSelectLanguageBt(index: 1, action: {})
             .previewLayout(.sizeThatFits)
+            .colorScheme(.light)
     }
 }
