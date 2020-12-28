@@ -19,7 +19,8 @@ public struct LanguagePickerV: View{
             Picker("", selection: self.$index){
                  ForEach(0 ..< Languages.allCases.count){
                     Text(Languages[$0])
-                        .foregroundColor((colorScheme == .dark ? .yellow : .black))
+                        .foregroundColor((colorScheme == .dark ? .yellow : .green))
+                        .fontWeight(.bold)
                   }
                }
         }

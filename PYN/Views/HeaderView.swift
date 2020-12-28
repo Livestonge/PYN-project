@@ -13,12 +13,13 @@ struct HeaderView: View {
     var body: some View {
         Text(title)
             .font(.headline)
+            .foregroundColor(.primary)
     }
 }
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
         HeaderView(title: "Oslo")
-            .previewLayout(.sizeThatFits)
+            //.previewLayout(.sizeThatFits)
     }
 }

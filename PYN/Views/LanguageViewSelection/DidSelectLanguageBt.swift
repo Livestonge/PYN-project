@@ -28,7 +28,7 @@ public struct DidSelectLanguageBt: View {
                      .font(.headline)
                      Image(systemName: "hand.thumbsup")
                      }
-                  .foregroundColor(colorScheme == .dark ? .black : .primary)
+                  .foregroundColor(colorScheme == .dark ? .yellow : .primary)
                 )
             .background(colorScheme == .dark ? .orange : Color(UIColor.systemBlue))
             .clipShape(Capsule())
