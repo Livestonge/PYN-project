@@ -8,32 +8,51 @@
 import SwiftUI
 
 struct ArticleRow_3: View {
-    var article: CompleteArticle
+    
+    @Environment(\.colorScheme) var colorScheme
+    let imageData: Data?
+    let title: String
+    let source: String
+    let date: String
     
     var body: some View {
         
         return HStack(alignment: .center){
-            Image(uiImage: UIImage(data: article.imageData)!)
+            Image(uiImage: (imageData != nil ? UIImage(data: imageData!)! : UIImage(systemName: "globe")!))
                 .resizable()
                 .frame(width: 50, height: 50)
                 .cornerRadius(10)
             VStack(alignment: .leading){
-                Text(article.rawArticle.title ?? "")
+                Text(title)
                     .font(.headline)
                     .lineLimit(2)
                     .allowsTightening(true)
                 HStack {
-                    Text(article.rawArticle.source.name ?? "")
+                    Text(source)
                         .font(.subheadline)
-                        .fontWeight(.thin)
+                        .foregroundColor( colorScheme == .dark ? .yellow : .green)
+                        .fontWeight(.black)
                         .padding(.top)
                     Spacer()
-                    Text(article.formattedDate)
+                    Text("\(date)")
                         .font(.subheadline)
                         .fontWeight(.thin)
-                        .padding(.top)
+                        .padding([.top, .trailing])
                 }
             }
         }
     }
+}
+
+struct ArticleRow_preview: PreviewProvider{
+   
+    static var previews: some View{
+        ArticleRow_3(imageData: nil,
+                     title: "The end of Covid",
+                     source: "CNN",
+                     date: "for 10 hours ago")
+            //.previewLayout(.sizeThatFits)
+            .colorScheme(.light)
+    }
+    
 }
