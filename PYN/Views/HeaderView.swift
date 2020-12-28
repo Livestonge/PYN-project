@@ -16,8 +16,9 @@ struct HeaderView: View {
     }
 }
 
-//struct HeaderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HeaderView(title: "Oslo")
-//    }
-//}
+struct HeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderView(title: "Oslo")
+            .previewLayout(.sizeThatFits)
+    }
+}

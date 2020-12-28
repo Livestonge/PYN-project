@@ -18,7 +18,7 @@ public extension Languages{
         return Languages.allCases.firstIndex(where: {$0 == language})!
     }
     
-    static func findLanguage(for rawvalue: String) -> Languages{
+    static func findLanguage(for rawvalue: String) -> Languages?{
         return Languages.allCases.first(where: {$0.rawValue == rawvalue})!
     }
 }

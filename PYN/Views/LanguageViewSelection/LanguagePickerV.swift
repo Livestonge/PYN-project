@@ -9,15 +9,21 @@ import SwiftUI
 
 public struct LanguagePickerV: View{
     
+    @Environment(\.colorScheme) var colorScheme
     @Binding var index: Int
     public var body: some View {
+        VStack{
+            Text("Please choose a language")
+                .font(Font.headline.bold())
+                .padding(.top, 10)
+            Picker("", selection: self.$index){
+                 ForEach(0 ..< Languages.allCases.count){
+                    Text(Languages[$0])
+                        .foregroundColor((colorScheme == .dark ? .yellow : .black))
+                  }
+               }
+        }
         
-        Picker("", selection: self.$index){
-             ForEach(0 ..< Languages.allCases.count){
-                Text(Languages[$0])
-                    .foregroundColor(($0 == index ? .yellow : .black))
-              }
-           }
     }
 }
 
