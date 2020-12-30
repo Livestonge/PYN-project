@@ -25,22 +25,6 @@ public enum ArticleError: CustomError{
     }
 }
 
-
-enum CoreDataError: CustomError{
-    case savingError(String), deletingError(String), uploadingsError(String)
-    
-    public var description: String{
-        switch self{
-        case .savingError(let item):
-            return "Could not save \(item)"
-        case .deletingError(let message):
-            return "Could not delete \(message)"
-        case .uploadingsError(let message):
-            return "Could not upload \(message)"
-        }
-    }
-}
-
 public enum NetworkError: CustomError{
     
     case network
@@ -68,7 +52,7 @@ public enum NetworkError: CustomError{
         case is DecodingError:
             self = .parsing(query)
         default:
-            self = error as? NetworkError ?? .unknown(error)
+            self = .unknown(error.localizedDescription)
         }
     }
 }
