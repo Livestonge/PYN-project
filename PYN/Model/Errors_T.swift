@@ -27,30 +27,31 @@ public enum ArticleError: CustomError{
 
 public enum NetworkError: CustomError{
     
-    case network
-    case parsing(String)
-    case unknown(Swift.Error)
+    case badServerResponse
+    case badConnection
+    case decodingError
+    case unknown(String)
     
     public var description: String{
         switch self{
-        case .network:
-            return "A networking error occured, please check if you have internet."
-        case .parsing(let queryItem):
-            return "Received bad data for \(queryItem), please retry later."
-        case .unknown:
+        case .badConnection:
+            return "A networking error occured,\n Please check if you have internet."
+        case .badServerResponse:
+            return "Did receive bad response from server,\n Please try again."
+        case .decodingError:
+            return "Unable to parse received data,\n Please make a new search. "
+        default:
             return "An unknown error occured"
         }
     }
     
-    init(error: Swift.Error, query: String){
-        
-        print(error)
+    init(error: URLError){
         
         switch error{
-        case is URLError:
-            self = .network
-        case is DecodingError:
-            self = .parsing(query)
+        case URLError.notConnectedToInternet, URLError.networkConnectionLost:
+            self = .badConnection
+        case URLError.badServerResponse:
+            self = .badServerResponse
         default:
             self = .unknown(error.localizedDescription)
         }
