@@ -45,13 +45,16 @@ public enum NetworkError: CustomError{
         }
     }
     
-    init(error: URLError){
+    init(error: Error){
         
         switch error{
-        case URLError.notConnectedToInternet, URLError.networkConnectionLost:
+        
+        case is URLError:
             self = .badConnection
-        case URLError.badServerResponse:
+        case NetworkError.badConnection:
             self = .badServerResponse
+        case is Swift.DecodingError:
+            self = .decodingError
         default:
             self = .unknown(error.localizedDescription)
         }
