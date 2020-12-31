@@ -14,6 +14,8 @@ struct ArticlePage: UIViewRepresentable {
    
     let articleUrlPath: String
     @Binding var didFinishLoading: Bool
+    @Binding var loadingDidFail: Bool
+    
     
     func makeUIView(context: Context) -> WKWebView{
         
@@ -47,15 +49,13 @@ struct ArticlePage: UIViewRepresentable {
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
-            
-            DispatchQueue.main.async {
-                withAnimation(Animation.easeIn(duration: 2)){ [weak self] in
-                    guard let self = self else {return}
-                    self.parent.didFinishLoading = true
-                }
-            }
-            
-            
+            self.parent.didFinishLoading = true
+        }
+        
+        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!,
+                     withError error: Error) {
+            self.parent.didFinishLoading = true
+            self.parent.loadingDidFail = true
         }
     }
 }
