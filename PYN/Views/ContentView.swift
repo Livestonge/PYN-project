@@ -33,7 +33,11 @@ struct ContentView: View {
                     }
                 }
             }
-        
+            .alert(isPresented: self.$searchResultProvider.errorDidOccured){
+                Alert(title: Text("OOPS"),
+                      message: Text("\(self.searchResultProvider.seachError!.description)"),
+                      dismissButton: .default(Text("Got it!!!")))
+            }
     }
 }
 
