@@ -17,8 +17,8 @@ public struct LanguagePickerV: View{
                 .font(Font.headline.bold())
                 .padding(.top, 10)
             Picker("", selection: self.$index){
-                 ForEach(0 ..< Languages.allCases.count){
-                    Text(Languages[$0])
+                 ForEach(0 ..< Language.allCases.count){
+                    Text(Language[$0])
                         .foregroundColor((colorScheme == .dark ? .yellow : .green))
                         .fontWeight(.bold)
                   }

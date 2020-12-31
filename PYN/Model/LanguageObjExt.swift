@@ -7,18 +7,18 @@
 
 import Foundation
 
-public extension Languages{
+public extension Language{
     
     static subscript(index: Int) -> String{
-        return Languages.allCases[index].rawValue
+        return Language.allCases[index].rawValue
         
     }
     
-    static func firstIndexOf(_ language: Languages) -> Int{
-        return Languages.allCases.firstIndex(where: {$0 == language})!
+    static func firstIndexOf(_ language: Language) -> Int{
+        return Language.allCases.firstIndex(where: {$0 == language})!
     }
     
-    static func findLanguage(for rawvalue: String) -> Languages?{
-        return Languages.allCases.first(where: {$0.rawValue == rawvalue})!
+    static func findLanguage(for rawvalue: String) -> Language?{
+        return Language.allCases.first(where: {$0.rawValue == rawvalue})!
     }
 }

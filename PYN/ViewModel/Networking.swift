@@ -32,7 +32,7 @@ class Networking {
                             .decode(type:SearchResult.self, decoder: JSONDecoder())
                             .mapError({NetworkError(error: $0, query: query)})
                             .map(\.articles)
-                            .map{ (article: [RawArticle]) -> ([RawArticle], String, Languages) in
+                            .map{ (article: [RawArticle]) -> ([RawArticle], String, Language) in
                                 return (article, query, language)
                             }
                             .flatMap(instantiateCompleteArticles)
@@ -40,7 +40,7 @@ class Networking {
     }
     
     
-     private func prepareUrlFor(_ query: String, for language: Languages) ->URL?{
+     private func prepareUrlFor(_ query: String, for language: Language) ->URL?{
         
         let searchParameters = [
                                 "q": query,
@@ -60,7 +60,7 @@ class Networking {
     //@available(iOS 14.0, *)
     func instantiateCompleteArticles(for rawArticles: [RawArticle],
                                      and queryTitle: String,
-                                     language: Languages) -> AnyPublisher<[CompleteArticle], Never>{
+                                     language: Language) -> AnyPublisher<[CompleteArticle], Never>{
         
         return rawArticles.publisher
             //Storing only article with non nil url address.
@@ -71,9 +71,7 @@ class Networking {
                                                                           fetchDate: Date(),
                                                                           language: language))
                                })
-                               .collect()
-                               .eraseToAnyPublisher()
-    }
-
-    
+                              .collect()
+                              .eraseToAnyPublisher()
+    } 
 }

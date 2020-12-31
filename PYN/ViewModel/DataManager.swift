@@ -64,7 +64,7 @@ final class DataManager: ObservableObject{
         
         if !self.metadataSet.isEmpty{
             for metadata in metadataSet{
-                let index = Languages.firstIndexOf(metadata.language)
+                let index = Language.firstIndexOf(metadata.language)
                 self.fetchData(for: metadata.title, selectedLanguageIndex: index)
             }
             // Empty the list after new data has been fetched.

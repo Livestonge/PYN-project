@@ -24,7 +24,7 @@ public struct DidSelectLanguageBt: View {
             .padding()
             .overlay(
                   HStack{
-                      Text("\(Languages[self.index])")
+                      Text("\(Language[self.index])")
                      .font(.headline)
                      Image(systemName: "hand.thumbsup")
                      }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Languages: String, CaseIterable, Codable, Hashable{
+public enum Language: String, CaseIterable, Codable, Hashable{
     
     case French, English, Spanish, Norwegian, Italian, Somali
     

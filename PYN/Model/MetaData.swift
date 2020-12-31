@@ -11,5 +11,5 @@ struct Metadata: Codable{
     
     let title: String
     let fetchDate: Date
-    let language: Languages
+    let language: Language
 }
