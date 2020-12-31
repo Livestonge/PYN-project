@@ -16,7 +16,7 @@ class Networking {
     private lazy var session: URLSession = {
         let config = URLSessionConfiguration.default
         config.waitsForConnectivity = true
-        config.timeoutIntervalForResource = 300
+        config.timeoutIntervalForResource = 3
         let session = URLSession(configuration: config)
         return session
     }()
