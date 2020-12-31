@@ -12,6 +12,7 @@ import Combine
 final class DataManager: ObservableObject{
     
     @Published var searchResult = Set<Query>()
+    @Published var didReceiveError: NetworkError? 
     var metadataSet = Set<Metadata>()
     var subscriptions = Set<AnyCancellable>()
     
@@ -97,16 +98,17 @@ final class DataManager: ObservableObject{
     
     func fetchData(for queryTitle: String, selectedLanguageIndex: Int){
         
-        let language = Languages.allCases[selectedLanguageIndex]
+        let language = Language.allCases[selectedLanguageIndex]
+        self.didReceiveError = nil
         
         self.networking.fetchData(query: queryTitle, language: language)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {completion in
                 switch completion{
                 case .failure(let error):
-                    print("\(error)")
-                case .finished:
-                    print("finished")
+                    self.didReceiveError = error
+                default:
+                    break
                 }
             }, receiveValue: { [weak self] completeArticles in
                 guard let self = self else {return}
