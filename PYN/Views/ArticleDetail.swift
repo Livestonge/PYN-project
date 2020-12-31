@@ -11,18 +11,23 @@ import SwiftUI
 struct ArticleDetail: View {
     
     let articleUrlPath: String
-    @State var didFinishedLoading = false
+    @State private var didFinishedLoading = false
+    @State private var pageLoadingFailed = false
     
     var body: some View {
         return ZStack{
-            ArticlePage(articleUrlPath: articleUrlPath,
-                        didFinishLoading: self.$didFinishedLoading)
-            
-        if !didFinishedLoading{
-            LoadingView()
-           }
-          }
-        .navigationBarTitle( "\(URL(string: articleUrlPath)!.host!)").font(.title)
+            if !pageLoadingFailed {
+                ArticlePage(articleUrlPath: articleUrlPath,
+                            didFinishLoading: self.$didFinishedLoading,
+                            loadingDidFail: $pageLoadingFailed)
+            }else {
+                NetworkingStatus()
+            }
+            if !didFinishedLoading{
+                LoadingView()
+               }
+              }
+            .navigationBarTitle( "\(URL(string: articleUrlPath)!.host ?? "")").font(.title)
  }
 }
 
@@ -30,5 +35,6 @@ struct ArticleDetail: View {
 struct ArticleDetail_Previews: PreviewProvider {
     static var previews: some View {
         ArticleDetail(articleUrlPath: "https://www.vg.no")
+            .colorScheme(.dark)
     }
 }
