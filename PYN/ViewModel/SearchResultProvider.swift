@@ -15,6 +15,10 @@ final class SearchResultProvider: NSObject, ObservableObject{
     @Published var showLanguagedView = false
     @Published var results = Set<Query>()
     @Published var selectedIndex = 0
+    @Published var errorDidOccured = false
+    
+    var seachError: NetworkError?
+    
     var subscriptions = Set<AnyCancellable>()
     
     var currentSearchTitle = ""
@@ -33,6 +37,13 @@ final class SearchResultProvider: NSObject, ObservableObject{
         
         self.subscribeToManagersSearchResult()
         
+        self.dataManager.$didReceiveError.sink(receiveValue: {error in
+            if error != nil{
+                self.errorDidOccured = true
+                self.seachError = error
+            }
+        }).store(in: &subscriptions)
+        
     }
     
     private func subscribeToManagersSearchResult(){
@@ -48,6 +59,8 @@ final class SearchResultProvider: NSObject, ObservableObject{
     
     func performNetworkRequest(){
         let query = self.currentSearchTitle
+        self.errorDidOccured = false
+        self.seachError = nil
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
         updateLanguageViewTo(false)
     }
