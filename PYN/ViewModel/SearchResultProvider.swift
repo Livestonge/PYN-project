@@ -59,7 +59,6 @@ final class SearchResultProvider: NSObject, ObservableObject{
     
     func performNetworkRequest(){
         let query = self.currentSearchTitle
-        self.errorDidOccured = false
         self.seachError = nil
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
         updateLanguageViewTo(false)
