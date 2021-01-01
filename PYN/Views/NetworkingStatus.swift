@@ -10,14 +10,12 @@ import SwiftUI
 struct NetworkingStatus: View {
     
     var body: some View {
-        VStack{
+        VStack(alignment: .center){
             Text("OOPS")
                 .font(.headline)
                 .foregroundColor(.red)
-            Text("Something went wrong")
-                .foregroundColor(.primary)
-                .font(.subheadline)
-            Text("Please check your internet connection.")
+            Text("Something went wrong.\n Please check your internet connction.")
+                .multilineTextAlignment(.center)
                 .foregroundColor(.primary)
                 .font(.subheadline)
         }
