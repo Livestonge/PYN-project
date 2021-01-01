@@ -14,7 +14,7 @@ struct NetworkingStatus: View {
             Text("OOPS")
                 .font(.headline)
                 .foregroundColor(.red)
-            Text("Something went wrong.\n Please check your internet connction.")
+            Text("Something went wrong.\n Please check your internet connection.")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.primary)
                 .font(.subheadline)
