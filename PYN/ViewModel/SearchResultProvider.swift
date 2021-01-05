@@ -16,6 +16,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
     @Published var results = Set<Query>()
     @Published var selectedIndex = 0
     @Published var errorDidOccured = false
+    @Published var isLoading = false
     
     var seachError: NetworkError?
     
@@ -39,10 +40,17 @@ final class SearchResultProvider: NSObject, ObservableObject{
         
         self.dataManager.$didReceiveError.sink(receiveValue: {error in
             if error != nil{
-                self.errorDidOccured = true
+                self.errorDidOccured = false
+                self.isLoading = false
                 self.seachError = error
             }
         }).store(in: &subscriptions)
+        
+        self.dataManager.$isFetchingData
+                        .sink(receiveValue: {[weak self] value in
+                            guard let self = self else {return}
+                            self.isLoading = value})
+                        .store(in: &subscriptions)
         
     }
     
@@ -53,6 +61,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
             .sink(receiveValue: { [weak self] queries in
                 guard let self = self else {return}
                 self.results = queries
+                self.isLoading = false
             })
             .store(in: &subscriptions)
     }
@@ -60,6 +69,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
     func performNetworkRequest(){
         let query = self.currentSearchTitle
         self.seachError = nil
+        self.isLoading = true
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
         updateLanguageViewTo(false)
     }

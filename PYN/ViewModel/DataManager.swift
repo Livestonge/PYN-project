@@ -12,7 +12,8 @@ import Combine
 final class DataManager: ObservableObject{
     
     @Published var searchResult = Set<Query>()
-    @Published var didReceiveError: NetworkError? 
+    @Published var didReceiveError: NetworkError?
+    @Published var isFetchingData = false
     var metadataSet = Set<Metadata>()
     var subscriptions = Set<AnyCancellable>()
     
@@ -64,6 +65,7 @@ final class DataManager: ObservableObject{
     private func fetchNewData(){
         
         if !self.metadataSet.isEmpty{
+            self.isFetchingData = true
             for metadata in metadataSet{
                 let index = Language.firstIndexOf(metadata.language)
                 self.fetchData(for: metadata.title, selectedLanguageIndex: index)
@@ -107,6 +109,7 @@ final class DataManager: ObservableObject{
                 switch completion{
                 case .failure(let error):
                     self.didReceiveError = error
+                    self.isFetchingData = false
                 default:
                     break
                 }
@@ -117,6 +120,7 @@ final class DataManager: ObservableObject{
                 queryObj.articles = articles
                 self.searchResult.insert(queryObj)
                 self.dowloadImages(forArticlesWith: queryTitle)
+                self.isFetchingData = false
             })
             .store(in: &subscriptions)
     }

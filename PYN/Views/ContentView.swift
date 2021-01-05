@@ -21,7 +21,13 @@ struct ContentView: View {
                                     ArticleView_2(articles: Array(query.articles))
                                 }
                             }
-                        .padding([.top, .bottom], 10)
+                            .padding([.top, .bottom], 10)
+                     }
+                    if self.searchResultProvider.isLoading{
+                        LoadingView(size: CGSize(width: 50,
+                                                 height: 50))
+                            .offset(CGSize(width: 0,
+                                           height: -geometry.size.height/2))
                     }
                     if self.searchResultProvider.showLanguagedView{
                         LanguagesView(index: self.$searchResultProvider.selectedIndex,
