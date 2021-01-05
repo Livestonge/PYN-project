@@ -36,8 +36,9 @@ struct ArticleRow_3: View {
                     Spacer()
                     Text("\(date)")
                         .font(.subheadline)
-                        .fontWeight(.thin)
-                        .padding([.top, .trailing])
+                        .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.secondary)
+                        .padding(.top)
                 }
             }
         }
