@@ -20,7 +20,8 @@ struct ArticleRow_3: View {
         return HStack(alignment: .center){
             Image(uiImage: (imageData != nil ? UIImage(data: imageData!)! : UIImage(systemName: "globe")!))
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: 80, height: 80)
+                .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
             VStack(alignment: .leading){
                 Text(title)
