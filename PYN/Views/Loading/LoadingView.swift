@@ -8,12 +8,14 @@
 import SwiftUI
 
 public struct LoadingView: View {
+    var size: CGSize
+    
     public var body: some View {
         ZStack{
             Circle()
                 .fill(Color.yellow)
-                .frame(width: 110, height: 110, alignment: .center)
-            LoadingTitleView()
+                .frame(width: size.width, height: size.height)
+            LoadingTitleView(size: size)
                 .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
           }
     }
@@ -21,7 +23,7 @@ public struct LoadingView: View {
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView()
+        LoadingView(size: CGSize(width: 110, height: 110))
             .previewLayout(.sizeThatFits)
     }
 }

@@ -10,14 +10,15 @@ import SwiftUI
 struct LoadingTitleView: View {
     
     @State var isScaling = false
-    
+    var size: CGSize
     var body: some View {
         
         return Text("Loading")
                 .font(.body)
+                .opacity( size.width < 100 ? 0 : 1)
                 .foregroundColor(.white)
-                .frame(width: 100,
-                       height: 100)
+                .frame(width: size.width - 10,
+                   height: size.height - 10)
                 .background(Color.black)
                 .clipShape(Circle())
                 .shadow(radius: 4)
@@ -35,7 +36,7 @@ struct LoadingTitleView: View {
 
 struct LoadingTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingTitleView(isScaling: false)
+        LoadingTitleView(isScaling: false, size: CGSize(width: 110, height: 110))
             .previewLayout(.sizeThatFits)
     }
 }

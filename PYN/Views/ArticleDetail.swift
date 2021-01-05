@@ -24,7 +24,7 @@ struct ArticleDetail: View {
                 NetworkingStatus()
             }
             if !didFinishedLoading{
-                LoadingView()
+                LoadingView(size: CGSize(width: 110, height: 110))
                }
               }
             .navigationBarTitle( "\(URL(string: articleUrlPath)!.host ?? "")").font(.title)
