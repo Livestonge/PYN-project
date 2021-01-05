@@ -17,12 +17,10 @@ struct ContentView: View {
                 ZStack(alignment: .bottom){
                     List{
                         ForEach(Array(self.searchResultProvider.results), id: \.self){ query in
-                            Section(header: HeaderView(title: query.title)){
-                                    ArticleView_2(articles: Array(query.articles))
-                                }
-                            }
-                            .padding([.top, .bottom], 10)
-                     }
+                            SectionView(query: query)
+                             .padding([.top, .bottom], 10)
+                      }
+                    }
                     if self.searchResultProvider.isLoading{
                         LoadingView(size: CGSize(width: 50,
                                                  height: 50))

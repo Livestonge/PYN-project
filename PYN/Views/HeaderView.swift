@@ -7,19 +7,50 @@
 
 import SwiftUI
 
-struct HeaderView: View {
+struct SectionView: View{
     
-    var title: String
-    var body: some View {
-        Text(title)
-            .font(.headline)
-            .foregroundColor(.primary)
+    @EnvironmentObject var searchResultProvider: SearchResultProvider
+    var query: Query
+    var body: some View{
+        Section(header:
+                    HeaderView(query: query)
+                    .environmentObject(searchResultProvider)
+        ){
+            ArticleView_2(articles: Array(query.articles))
+        }
     }
 }
 
-struct HeaderView_Previews: PreviewProvider {
+struct HeaderView: View {
+    
+    var query: Query
+    @EnvironmentObject var searchResultProvider: SearchResultProvider
+    var body: some View {
+        HStack{
+            Text(query.title)
+                .font(.headline)
+                .foregroundColor(.primary)
+            Spacer()
+            Button(action: self.removeQuery){
+                Image(systemName: "minus.circle")
+                    .foregroundColor(.red)
+                    .font(.title2)
+            }
+        }
+        .padding()
+        
+    }
+    
+    private func removeQuery(){
+        self.searchResultProvider.results.remove(self.query)
+    }
+}
+
+
+struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(title: "Oslo")
+        let query = Query(title: "Oslo")
+        SectionView(query: query)
             //.previewLayout(.sizeThatFits)
     }
 }
