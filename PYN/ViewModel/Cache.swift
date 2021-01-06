@@ -81,14 +81,13 @@ extension Cache{
     final class KeyTracker: NSObject, NSCacheDelegate, ObservableObject{
        
          var keys = Set<Key>()
-         @Published var removedKey: Key?
+         @Published var removedValue: Value?
         
         func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any){
             
-            guard let value = obj as? Entry else {return}
-            self.keys.remove(value.key)
-            self.removedKey = value.key
-            print("evicting key:", value.key)
+            guard let entry = obj as? Entry else {return}
+            self.removedValue = entry.value
+            self.keys.remove(entry.key)
         }
         
   }
@@ -114,10 +113,8 @@ extension Cache: Codable where Key: Codable, Value: Codable{
         do{
             let data = try JSONEncoder().encode(self)
             try? data.write(to: .cacheFile)
-            print("Did write to file successfully!!!!")
         }
         catch let error {
-            print("OOPS An Error occured during file writting")
             print(error.localizedDescription)
         }
         
@@ -125,7 +122,7 @@ extension Cache: Codable where Key: Codable, Value: Codable{
     
     func loadFromDisk(){
         
-        guard let data = try? Data(contentsOf: .cacheFile) else {print("reading from file FAILED!!"); return}
+        guard let data = try? Data(contentsOf: .cacheFile) else {return}
         guard let entries = try? JSONDecoder().decode([Entry].self, from: data) else {return}
         entries.forEach{ [weak self] entry in
                          guard let self = self else {return}
