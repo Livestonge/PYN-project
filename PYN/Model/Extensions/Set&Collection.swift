@@ -26,11 +26,11 @@ extension Set where Element == Query {
         self.insert(queryToInsert)
     }
     
-    mutating func updatesResults(for title: String?,
-                                 and article: CompleteArticle,
+    mutating func updatesResults(with article: CompleteArticle,
                                  removeArticle: Bool = false) -> CompleteArticle?{
         
-        guard let title = title,var query = self.removeQueryWith(title: title) else {return nil}
+        let title = article.metadata.title
+        guard var query = self.removeQueryWith(title: title) else {return nil}
         guard let articleIndex = query.articles.getIndex(of: article)
         else {self.reInsert(query); return nil}
         
@@ -41,7 +41,10 @@ extension Set where Element == Query {
         }
 
         let newQuery = Query(title: query.title, articles: query.articles)
-        self.insert(newQuery)
+        
+        if !newQuery.articles.isEmpty{
+            self.insert(newQuery)
+        }
         
         return (removeArticle == false ? newQuery.articles[articleIndex] : nil)
 
