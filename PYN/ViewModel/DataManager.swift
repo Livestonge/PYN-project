@@ -26,16 +26,14 @@ final class DataManager: ObservableObject{
     
     private func subscribingToMemoryCacheActivities(){
 
-        _ = self.cache.keyTracker.$removedKey
+        self.cache.keyTracker.$removedValue
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] key in
-                guard let self = self, key != nil else {return}
-                guard let entry = self.cache.retrieveEntry(for: key!) else {return}
-                _ = self.searchResult.updatesResults(for: nil,
-                                                     and: entry.value,
-                                                     removeArticle: true)
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self, value != nil else {return}
+                _ = self.searchResult.updatesResults(with: value!,removeArticle: true)
             })
+            .store(in: &subscriptions)
     }
     
     
@@ -59,6 +57,12 @@ final class DataManager: ObservableObject{
             // fetching the metadata from the article before removing from the cache.
             self.metadataSet.insert(article.metadata)
             self.cache.remove(key: entry.key)
+        }
+    }
+    
+    func remove(_ query: Query){
+        for article in query.articles{
+            self.cache.remove(key: article.id)
         }
     }
     
@@ -139,18 +143,16 @@ final class DataManager: ObservableObject{
                                .receive(on: DispatchQueue.main)
                                .sink(receiveValue: {[weak self] completeArticle in
                                 guard let self = self else {return}
-                                self.updateSearchResultAndCache(for: queryTitle,
-                                                                with: completeArticle)
+                                self.updateSearchResultAndCache(completeArticle)
                                })
                                .store(in: &subscriptions)
     }
     
     
     
-    private func updateSearchResultAndCache(for queryTitle: String,
-                                            with completeArticle: CompleteArticle){
+    private func updateSearchResultAndCache(_ completeArticle: CompleteArticle){
         
-        guard let article = self.searchResult.updatesResults(for: queryTitle, and: completeArticle)
+        guard let article = self.searchResult.updatesResults(with: completeArticle)
         else {return}
         self.cache.insert(value: article, for: article.id)
     }
