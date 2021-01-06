@@ -82,6 +82,10 @@ final class SearchResultProvider: NSObject, ObservableObject{
         self.dataManager.saveDataToDisk()
     }
     
+    func delete(_ query: Query){
+        self.dataManager.remove(query)
+    }
+    
     private func updateLanguageViewTo(_ state: Bool){
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
