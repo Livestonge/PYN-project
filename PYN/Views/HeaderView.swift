@@ -42,7 +42,7 @@ struct HeaderView: View {
     }
     
     private func removeQuery(){
-        self.searchResultProvider.results.remove(self.query)
+        self.searchResultProvider.delete(self.query)
     }
 }
 
