@@ -7,13 +7,13 @@
 
 import Foundation
 
-public protocol CustomError: Error, CustomStringConvertible{}
+protocol CustomError: Error, CustomStringConvertible{}
 
-public enum ArticleError: CustomError{
+enum ArticleError: CustomError{
     
     case emptyArticlesList(String), articleWithNils, convertingToDateError, downloadImageFailed
     
-    public var description: String{
+    var description: String{
         switch self{
         case .emptyArticlesList(let forQuery):
             return "Got no articles for \(forQuery)"
@@ -25,14 +25,14 @@ public enum ArticleError: CustomError{
     }
 }
 
-public enum NetworkError: CustomError{
+enum NetworkError: CustomError{
     
     case badServerResponse
     case badConnection
     case decodingError
     case unknown(String)
     
-    public var description: String{
+    var description: String{
         switch self{
         case .badConnection:
             return "A networking error occured,\n Please check if you have internet."

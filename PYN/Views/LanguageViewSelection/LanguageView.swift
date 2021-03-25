@@ -22,11 +22,11 @@ public struct LanguagesView: View {
                    }
                     .languageStackStyling()
                     .scaleEffect(isScaling ? 1 : 0)
-                            .onAppear(perform: {
-                                withAnimation(Animation.easeOut(duration: 2)){
-                                    isScaling.toggle()
-                                }
-                           })
+                    .onAppear(perform: {
+                        withAnimation(Animation.easeOut(duration: 2)){
+                            isScaling.toggle()
+                        }
+                   })
         }
 }
 
@@ -36,5 +36,6 @@ struct LanguageView_Previews: PreviewProvider {
         LanguagesView(index: .constant(3),
                       action: {})
             .colorScheme(.dark)
+            .previewLayout(.sizeThatFits)
     }
 }

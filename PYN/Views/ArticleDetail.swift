@@ -27,7 +27,7 @@ struct ArticleDetail: View {
                 LoadingView(size: CGSize(width: 110, height: 110))
                }
               }
-            .navigationBarTitle( "\(URL(string: articleUrlPath)!.host ?? "")").font(.title)
+            .navigationBarTitle( "\(URL(string: articleUrlPath)?.host ?? "")").font(.title)
  }
 }
 

@@ -53,7 +53,7 @@ struct ArticleRow_preview: PreviewProvider{
                      title: "The end of Covid",
                      source: "CNN",
                      date: "for 10 hours ago")
-            //.previewLayout(.sizeThatFits)
+            .previewLayout(.sizeThatFits)
             .colorScheme(.light)
     }
     

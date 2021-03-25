@@ -14,6 +14,6 @@ public enum Language: String, CaseIterable, Codable, Hashable{
     
     var initials: String {
         let initial = self.rawValue.prefix(2)
-        return String(initial.lowercased())
+        return initial.lowercased()
     }
 }

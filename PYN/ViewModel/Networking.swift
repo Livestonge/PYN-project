@@ -57,7 +57,7 @@ class Networking {
                                ]
         
         var components = URLComponents(string: "https://newsapi.org/v2/everything")
-        components!.queryItems = searchParameters.map{(key, value) -> URLQueryItem in
+        components?.queryItems = searchParameters.map{(key, value) -> URLQueryItem in
             URLQueryItem(name: key, value: value)
         }
         

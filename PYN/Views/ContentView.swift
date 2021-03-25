@@ -27,7 +27,7 @@ struct ContentView: View {
                             .offset(CGSize(width: 0,
                                            height: -geometry.size.height/2))
                     }
-                    if self.searchResultProvider.showLanguagedView{
+                    if self.searchResultProvider.showLanguageView{
                         LanguagesView(index: self.$searchResultProvider.selectedIndex,
                                       action: self.searchResultProvider.performNetworkRequest)
                             .frame(width: geometry.size.width * 0.8,
@@ -39,7 +39,7 @@ struct ContentView: View {
             }
             .alert(isPresented: self.$searchResultProvider.errorDidOccured){
                 Alert(title: Text("OOPS"),
-                      message: Text("\(self.searchResultProvider.seachError!.description)"),
+                      message: Text("\(self.searchResultProvider.searchError!.description)"),
                       dismissButton: .default(Text("Got it!!!")))
             }
     }

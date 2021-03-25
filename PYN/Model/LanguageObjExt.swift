@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Language{
+extension Language{
     
     static subscript(index: Int) -> String{
         return Language.allCases[index].rawValue
@@ -19,6 +19,9 @@ public extension Language{
     }
     
     static func findLanguage(for rawvalue: String) -> Language?{
-        return Language.allCases.first(where: {$0.rawValue == rawvalue})!
+        
+        guard let language = Language.allCases.first(where: {$0.rawValue == rawvalue})
+        else {return nil}
+        return language
     }
 }

@@ -26,5 +26,6 @@ struct NetworkingStatus: View {
 struct NetworkingStatus_Previews: PreviewProvider {
     static var previews: some View {
         NetworkingStatus()
+            .previewLayout(.fixed(width: 300, height: 100))
     }
 }

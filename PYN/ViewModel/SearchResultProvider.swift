@@ -12,17 +12,17 @@ import Combine
 final class SearchResultProvider: NSObject, ObservableObject{
     
     
-    @Published var showLanguagedView = false
+    @Published var showLanguageView = false
     @Published var results = Set<Query>()
     @Published var selectedIndex = 0
     @Published var errorDidOccured = false
     @Published var isLoading = false
     
-    var seachError: NetworkError?
+    var searchError: NetworkError?
     
     var subscriptions = Set<AnyCancellable>()
     
-    var currentSearchTitle = ""
+    private var currentSearchTitle = ""
     let searchController: UISearchController!
     lazy var dataManager = DataManager()
     
@@ -42,7 +42,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
             if error != nil{
                 self.errorDidOccured = false
                 self.isLoading = false
-                self.seachError = error
+                self.searchError = error
             }
         }).store(in: &subscriptions)
         
@@ -68,7 +68,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
     
     func performNetworkRequest(){
         let query = self.currentSearchTitle
-        self.seachError = nil
+        self.searchError = nil
         self.isLoading = true
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
         updateLanguageViewTo(false)
@@ -90,7 +90,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
             withAnimation(Animation.easeInOut(duration: 2)){
-                self.showLanguagedView = state
+                self.showLanguageView = state
             }
 
         }
@@ -102,7 +102,7 @@ extension SearchResultProvider: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         if let title = searchController.searchBar.text, !title.isEmpty{
             self.currentSearchTitle = title
-           updateLanguageViewTo(true)
+            updateLanguageViewTo(true)
             
         }
     }
