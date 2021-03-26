@@ -10,7 +10,7 @@ import SwiftUI
 struct ArticleRow_3: View {
     
     @Environment(\.colorScheme) var colorScheme
-    let imageData: Data?
+    let imageData: Data
     let title: String
     let source: String
     let date: String
@@ -18,7 +18,7 @@ struct ArticleRow_3: View {
     var body: some View {
         
         return HStack(alignment: .center){
-            Image(uiImage: (imageData != nil ? UIImage(data: imageData!)! : UIImage(systemName: "globe")!))
+            Image(uiImage: UIImage(data: imageData)!)
                 .resizable()
                 .frame(width: 50, height: 50)
                 .aspectRatio(contentMode: .fit)
@@ -49,7 +49,7 @@ struct ArticleRow_3: View {
 struct ArticleRow_preview: PreviewProvider{
    
     static var previews: some View{
-        ArticleRow_3(imageData: nil,
+        ArticleRow_3(imageData: UIImage(systemName: "globe")!.pngData()!,
                      title: "The end of Covid",
                      source: "CNN",
                      date: "for 10 hours ago")

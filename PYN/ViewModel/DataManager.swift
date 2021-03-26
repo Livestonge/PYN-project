@@ -135,17 +135,32 @@ final class DataManager: ObservableObject{
                               .flatMap(\.articles.publisher)
                               .filter({ $0.metadata.title == queryTitle})
                               .subscribe(on: DispatchQueue.global())
-                              .map({(article: CompleteArticle) -> CompleteArticle in
-                                var newArticle = article
-                                newArticle.downloadImage()
-                                return newArticle
-                               })
-                               .receive(on: DispatchQueue.main)
-                               .sink(receiveValue: {[weak self] completeArticle in
-                                guard let self = self else {return}
-                                self.updateSearchResultAndCache(completeArticle)
-                               })
-                               .store(in: &subscriptions)
+                              .flatMap(downloadImageFor)
+                              .receive(on: DispatchQueue.main)
+                              .sink(receiveValue: {[weak self] completeArticle in
+                              guard let self = self else {return}
+                              self.updateSearchResultAndCache(completeArticle)
+                              })
+                              .store(in: &subscriptions)
+    }
+    
+    func downloadImageFor(article: CompleteArticle) -> AnyPublisher<CompleteArticle, Never>{
+        
+        guard let path = article.rawArticle.urlToImage, let url = URL(string: path)
+        else {return Just(article).eraseToAnyPublisher()}
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+                 .map(\.data)
+                 .map{(data: Data) -> UIImage? in
+                     return UIImage(data: data)}
+                 .map{(image: UIImage?) -> CompleteArticle in
+                     var newArticle = article
+                     newArticle.imageData = image?.pngData() ?? article.imageData
+                     return newArticle
+                 }
+                 .replaceError(with: article)
+                 .eraseToAnyPublisher()
+            
     }
     
     

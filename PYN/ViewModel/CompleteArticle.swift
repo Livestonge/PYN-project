@@ -29,15 +29,6 @@ struct CompleteArticle: Codable, Identifiable{
         let formattedDate = relativeFormatter.localizedString(for: articleDate, relativeTo: Date())
         return formattedDate
     }
-    
-    mutating func downloadImage(){
-        guard let path = rawArticle.urlToImage, let url = URL(string: path),
-              let content = try? Data(contentsOf: url),
-              let data = UIImage(data: content)
-        else {return}
-        
-        self.imageData = data.pngData()!
-    }
         
     
 }
