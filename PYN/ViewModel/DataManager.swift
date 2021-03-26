@@ -144,7 +144,7 @@ final class DataManager: ObservableObject{
                               .store(in: &subscriptions)
     }
     
-    func downloadImageFor(article: CompleteArticle) -> AnyPublisher<CompleteArticle, Never>{
+    private func downloadImageFor(article: CompleteArticle) -> AnyPublisher<CompleteArticle, Never>{
         
         guard let path = article.rawArticle.urlToImage, let url = URL(string: path)
         else {return Just(article).eraseToAnyPublisher()}
