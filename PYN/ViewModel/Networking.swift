@@ -26,7 +26,8 @@ class Networking {
         
         
         guard let url = self.prepareUrlFor(query, for: language) else {
-            fatalError("Url Not Found")
+            return Fail(error: NetworkError.unknown("Bad url"))
+                   .eraseToAnyPublisher()
         }
         
         return  self.session.dataTaskPublisher(for: url)
