@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C5390842603662600C17BF5 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5390832603662600C17BF5 /* Key.swift */; };
+		5C891616261373E600C765F8 /* ScreenShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C891615261373E600C765F8 /* ScreenShot.png */; };
 		5CE3DF5026075D130088C724 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DF4F26075D130088C724 /* URL.swift */; };
 		84051CBC257D09CE00F216D0 /* LanguageObjExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84051CBB257D09CE00F216D0 /* LanguageObjExt.swift */; };
 		841DCA882555866300619B5B /* SearchResultProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DCA872555866300619B5B /* SearchResultProvider.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		5C5390832603662600C17BF5 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		5C891615261373E600C765F8 /* ScreenShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot.png; sourceTree = "<group>"; };
 		5CE3DF4F26075D130088C724 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		84051CBB257D09CE00F216D0 /* LanguageObjExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageObjExt.swift; path = PYN/Model/LanguageObjExt.swift; sourceTree = SOURCE_ROOT; };
 		841DCA872555866300619B5B /* SearchResultProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultProvider.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C89160F2613734B00C765F8 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5C891615261373E600C765F8 /* ScreenShot.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		8435236925929A6B00498191 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 		84493B2C2555742D008DBFDA /* PYN */ = {
 			isa = PBXGroup;
 			children = (
+				5C89160F2613734B00C765F8 /* images */,
 				84493B2D2555742D008DBFDA /* PYNApp.swift */,
 				84E532E6255AD02D00D90843 /* UIControllerRepresentable.swift */,
 				84DEA5BE2559DB96001E7BCF /* Model */,
@@ -344,6 +355,7 @@
 			files = (
 				84493B3525557432008DBFDA /* Preview Assets.xcassets in Resources */,
 				84493B3225557432008DBFDA /* Assets.xcassets in Resources */,
+				5C891616261373E600C765F8 /* ScreenShot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
