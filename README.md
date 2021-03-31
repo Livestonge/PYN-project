@@ -38,3 +38,10 @@ extension URL{
 * Storing the news list on the phone.
 * Uploading the user´s news when the app moves to foreground.
 * The app is automatically updating the news list once every hour.
+
+## License
+
+MIT
+
+Email: awaleh_h@yahoo.com
+@Livestonge
