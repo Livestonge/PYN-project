@@ -2,6 +2,7 @@
 
 PYN is an IOS app which provides to the user a customized news.<br/> The user provides keywords and then the app displays a filtered news.<br/>
 This is a personal project and the goal was to practice my IOS development skill.
+<br><br>
 
 <img align="left" src="images/Keyword.png">
 <img align="center" src="images/Screenshot.png"><br/>
