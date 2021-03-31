@@ -3,6 +3,8 @@
 PYN is an IOS app which provides to the user a customized news.<br/> The user provides keywords and then the app displays a filtered news.<br/>
 This is a personal project and the goal was to practice my IOS development skill.
 
+<img align="center" src="images/Screenshot.png"><br/>
+
 ## Technologies
 
 The project is created with:<br/>
@@ -25,4 +27,11 @@ Use the provided API KEY, this way:
 extension URL{
  static let apiKey = "Write-Your-Api-Key-Here"
 }
+```
 
+## Features
+
+* Ability to get your news in five different languages.
+* Storing the news list on the phone.
+* Uploading the user´s news when the app moves to foreground.
+* The app is automatically updating the news list once every hour.
