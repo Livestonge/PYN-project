@@ -13,7 +13,8 @@ This is a personal project and the goal was to practice my IOS development skill
 The project is created with:<br/>
 
 * Xcode version: 12.4
-* Swift version: 5
+* Swift version: 5.3
+* IOS 13.2
 * Git version: 2.31
 * SwiftUI
 * Combine
