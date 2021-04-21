@@ -15,7 +15,6 @@ struct LoadingTitleView: View {
         
         return Text("Loading")
                 .font(.body)
-                .opacity( size.width < 100 ? 0 : 1)
                 .foregroundColor(.white)
                 .frame(width: size.width - 10,
                    height: size.height - 10)
