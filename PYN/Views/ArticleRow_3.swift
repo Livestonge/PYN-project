@@ -30,17 +30,15 @@ struct ArticleRow_3: View {
                     .allowsTightening(true)
                 HStack {
                     Text(source)
-                        .font(.subheadline)
                         .foregroundColor( colorScheme == .dark ? .yellow : .green)
                         .fontWeight(.black)
-                        .padding(.top)
                     Spacer()
                     Text("\(date)")
-                        .font(.subheadline)
                         .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.secondary)
-                        .padding(.top)
                 }
+                .font(.subheadline)
+                .padding(.top)
             }
         }
     }
