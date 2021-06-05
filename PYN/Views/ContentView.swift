@@ -22,8 +22,8 @@ struct ContentView: View {
                       }
                     }
                     if self.searchResultProvider.isLoading{
-                        LoadingView(size: CGSize(width: 50,
-                                                 height: 50))
+                        LoadingView(size: CGSize(width: 80,
+                                                 height: 80))
                             .offset(CGSize(width: 0,
                                            height: -geometry.size.height/2))
                     }
