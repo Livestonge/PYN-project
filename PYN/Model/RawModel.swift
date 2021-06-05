@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RawArticle: Codable, Hashable{
+struct Article: Hashable{
     
     static func == (lhs: Article, rhs: Article) -> Bool {
         return lhs.title == rhs.title

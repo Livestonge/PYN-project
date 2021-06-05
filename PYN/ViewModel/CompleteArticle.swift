@@ -13,7 +13,7 @@ import UIKit
 struct CompleteArticle: Codable, Identifiable{
     
     var id = UUID()
-    let rawArticle: RawArticle
+    let rawArticle: Article
     let metadata: Metadata
     var imageData: Data = UIImage(systemName: "globe")!.pngData()!
     
