@@ -12,10 +12,10 @@ struct ArticleView_2: View {
     
     var body: some View {
             ForEach(articles){ article in
-                NavigationLink(destination: ArticleDetail(articleUrlPath: article.rawArticle.url!)){
+                NavigationLink(destination: ArticleDetail(articleUrlPath: article.rawArticle.url)){
                     ArticleRow_3(imageData: article.imageData,
-                                 title: article.rawArticle.title ?? "",
-                                 source: article.rawArticle.source.name ?? "",
+                                 title: article.rawArticle.title,
+                                 source: article.rawArticle.media,
                                  date: article.formattedDate)
                 }
             }

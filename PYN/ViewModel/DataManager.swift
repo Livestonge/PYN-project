@@ -146,7 +146,8 @@ final class DataManager: ObservableObject{
     
     private func downloadImageFor(article: CompleteArticle) -> AnyPublisher<CompleteArticle, Never>{
         
-        guard let path = article.rawArticle.urlToImage, let url = URL(string: path)
+        let path = article.rawArticle.urlToImage
+        guard !path.isEmpty, let url = URL(string: path)
         else {return Just(article).eraseToAnyPublisher()}
         
         return URLSession.shared.dataTaskPublisher(for: url)

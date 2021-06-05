@@ -20,7 +20,8 @@ struct CompleteArticle: Codable, Identifiable{
     var formattedDate: String{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard let dateText = rawArticle.publishedAt, let articleDate = formatter.date(from: dateText)
+        let dateText = rawArticle.publishedAt
+        guard let articleDate = formatter.date(from: dateText)
         else {return "Invalide date"}
         
         let relativeFormatter = RelativeDateTimeFormatter()
