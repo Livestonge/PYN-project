@@ -52,7 +52,7 @@ final class DataManager: ObservableObject{
         let entries = self.cache.retrieveAll()
         for entry in entries{
             let article = entry.value
-            guard article.metadata.fetchDate.isOldData
+            guard article.metadata.fetchedDate.isOldData
             else {continue}
             // fetching the metadata from the article before removing from the cache.
             self.metadataSet.insert(article.metadata)

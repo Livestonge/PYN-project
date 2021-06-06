@@ -10,6 +10,6 @@ import Foundation
 struct Metadata: Codable{
     
     let title: String
-    let fetchDate: Date
+    let fetchedDate: Date
     let language: Language
 }

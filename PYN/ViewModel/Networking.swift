@@ -76,7 +76,7 @@ class Networking {
                               .map({ (rawArticle: Article) -> CompleteArticle in
                                 return CompleteArticle(rawArticle: rawArticle,
                                                        metadata: Metadata(title: queryTitle,
-                                                                          fetchDate: Date(),
+                                                                          fetchedDate: Date(),
                                                                           language: language))
                                })
                               .collect()
