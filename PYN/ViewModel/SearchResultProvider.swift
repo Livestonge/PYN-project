@@ -11,13 +11,11 @@ import Combine
 
 final class SearchResultProvider: NSObject, ObservableObject{
     
-    
-    @Published var showLanguageView = false
     @Published var results = Set<Query>()
     @Published var selectedIndex = 0
     @Published var errorDidOccured = false
-    @Published var isLoading = false
     
+    @Published var state: State = .isPending
     var searchError: NetworkError?
     
     var subscriptions = Set<AnyCancellable>()
@@ -41,16 +39,10 @@ final class SearchResultProvider: NSObject, ObservableObject{
         self.dataManager.$didReceiveError.sink(receiveValue: {error in
             if error != nil{
                 self.errorDidOccured = false
-                self.isLoading = false
+                self.state = .isPending
                 self.searchError = error
             }
         }).store(in: &subscriptions)
-        
-        self.dataManager.$isFetchingData
-                        .sink(receiveValue: {[weak self] value in
-                            guard let self = self else {return}
-                            self.isLoading = value})
-                        .store(in: &subscriptions)
         
     }
     
@@ -61,7 +53,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
             .sink(receiveValue: { [weak self] queries in
                 guard let self = self else {return}
                 self.results = queries
-                self.isLoading = false
+                self.state = .isPending
             })
             .store(in: &subscriptions)
     }
@@ -69,7 +61,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
     func performNetworkRequest(){
         let query = self.currentSearchTitle
         self.searchError = nil
-        self.isLoading = true
+        //self.state = .isLoading
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
         updateLanguageViewTo(false)
     }
@@ -90,8 +82,7 @@ final class SearchResultProvider: NSObject, ObservableObject{
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
             withAnimation(Animation.easeInOut(duration: 2)){
-                self.showLanguageView = state
-            }
+                self.state = state == true ? .isShowingLanguage : .isLoading}
 
         }
     }
