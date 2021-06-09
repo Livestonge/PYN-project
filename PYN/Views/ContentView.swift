@@ -36,21 +36,24 @@ extension ContentView{
     
     func auxilaryView(geometry: GeometryProxy) -> some View{
         
-        switch self.searchResultProvider.state{
-        case .isPending:
-            return AnyView(EmptyView())
-        case .isShowingLanguage:
-            return AnyView(LanguagesView(index: self.$searchResultProvider.selectedIndex,
-                                         action: self.searchResultProvider.performNetworkRequest)
-                            .frame(width: geometry.size.width * 0.8,
-                                   alignment: .center)
-                            .zIndex(10)
-                            .transition(.move(edge: .bottom)))
-        case .isLoading:
-            return AnyView(LoadingView(size: CGSize(width: 80,
-                                                    height: 80))
-                               .offset(CGSize(width: 0,
-                                              height: -geometry.size.height/2)))
+        return Group{
+            
+           switch self.searchResultProvider.state{
+           case .isPending:
+               EmptyView()
+           case .isShowingLanguage:
+               LanguagesView(index: self.$searchResultProvider.selectedIndex,
+                                            action:  self.searchResultProvider.performNetworkRequest)
+                               .frame(width: geometry.size.width * 0.8,
+                                       alignment: .center)
+                               .zIndex(10)
+                               .transition(.move(edge: .bottom))
+           case .isLoading:
+               LoadingView(size: CGSize(width: 80,
+                                                       height: 80))
+                                   .offset(CGSize(width: 0,
+                                               height: -geometry.size.height/2))
+            }
         }
     }
 }
