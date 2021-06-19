@@ -14,7 +14,6 @@ struct SectionView: View{
     var body: some View{
         Section(header:
                     HeaderView(query: query)
-                    .environmentObject(searchResultProvider)
         ){
             ArticleView_2(articles: Array(query.articles))
         }
