@@ -50,8 +50,9 @@ extension ContentView{
                                .transition(.move(edge: .bottom))
            case .isLoading:
                LoadingView(size: CGSize(width: 80,
-                                                       height: 80))
-                                   .offset(CGSize(width: 0,
+                                        height: 80)
+                                       )
+                                       .offset(CGSize(width: 0,
                                                height: -geometry.size.height/2))
             }
         }

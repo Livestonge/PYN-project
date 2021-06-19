@@ -61,9 +61,8 @@ final class SearchResultProvider: NSObject, ObservableObject{
     func performNetworkRequest(){
         let query = self.currentSearchTitle
         self.searchError = nil
-        //self.state = .isLoading
         self.dataManager.fetchData(for: query, selectedLanguageIndex: selectedIndex)
-        updateLanguageViewTo(false)
+        updateLanguageViewTo(.isLoading)
     }
     
     func loadFromDisc(){
@@ -78,11 +77,14 @@ final class SearchResultProvider: NSObject, ObservableObject{
         self.dataManager.remove(query)
     }
     
-    private func updateLanguageViewTo(_ state: Bool){
+    private func updateLanguageViewTo(_ state: State){
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
             withAnimation(Animation.easeInOut(duration: 2)){
-                self.state = state == true ? .isShowingLanguage : .isLoading}
+                self.state = state
+        
+            }
 
         }
     }
@@ -93,7 +95,7 @@ extension SearchResultProvider: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         if let title = searchController.searchBar.text, !title.isEmpty{
             self.currentSearchTitle = title
-            updateLanguageViewTo(true)
+            updateLanguageViewTo(.isShowingLanguage)
             
         }
     }
@@ -101,7 +103,7 @@ extension SearchResultProvider: UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
        
 //        self.showSearchedItems = false
-          updateLanguageViewTo(false)
+        updateLanguageViewTo(.isPending)
 
     }
   
